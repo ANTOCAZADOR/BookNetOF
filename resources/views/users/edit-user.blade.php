@@ -1,9 +1,8 @@
 <x-layout>
 <title>Editar usuario</title>
-</head>
 <body>
     <h1>Edit User</h1>
-    <form action="{{ route('users.update', $user) }}" method="POST">
+    <form action="{{ route('user.update', $user) }}" method="POST">
         @csrf
         @method('PATCH')
 

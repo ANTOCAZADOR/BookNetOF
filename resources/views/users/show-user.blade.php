@@ -3,7 +3,7 @@
 </head>
 <body>
     <h1>{{ $user->name }}</h1>
-    <form action="{{ route('users.show', $user) }}"method="POST">
+    <form action="{{ route('user.show', $user) }}"method="POST">
     <ul>
         <li>{{ $user->email }}</li>
         <li>{{ $user->rol }}</li>

@@ -27,4 +27,9 @@ Route::middleware([
 
 
 Route::resource( 'user', UserController::class)
-    ->parameters(['user' => 'user']);
+    ->parameters(['user' => 'user'])
+    ->middleware('auth');
+
+Route::get('/landing', function () {
+    return view('landing');
+});

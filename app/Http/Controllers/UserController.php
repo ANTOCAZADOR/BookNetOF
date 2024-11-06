@@ -9,6 +9,13 @@ use Illuminate\Routing\Controllers\Middleware;
 
 class UserController extends Controller
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth', except: ['index', 'show']),
+        ];
+    }
+    
     public function index()
     {
         $users = User::all();

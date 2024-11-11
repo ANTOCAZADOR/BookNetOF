@@ -33,12 +33,14 @@
                 <td>{{ $user->created_at }}</td>
                 <td>{{ $user->updated_at }}</td>
                 <td>
+                    @can('viewAdminDashboard', Auth::user())
                     <form action="{{ route ('user.destroy', $user) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('user.edit', $user) }}">Editar</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Borrar</button>
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach

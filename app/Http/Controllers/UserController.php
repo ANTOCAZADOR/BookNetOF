@@ -40,6 +40,7 @@ class UserController extends Controller
             'name' => ['required', 'max:255'],
             'email'  => ['required', 'max:255'],
             'password' => ['required', 'max:100'], 
+            'rol' => 'required|string|in:user,administrator',
         ]); 
 
         //Hash de la contraseña antes de crear el usuario

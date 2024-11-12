@@ -1,11 +1,13 @@
 <x-layout>
     <h1>Lista de Usuarios</h1>
-
     <p>
         <a href="{{ route('user.create') }}">Registrar Usuario</a>
     </p>
-
-    <table class="table table-dark table-striped mt-4">
+    <div class="card-body">
+    <div class="card-sub">
+        Lista de usuairos en la base de datos:
+    </div>
+    <table class="table mt-3">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -19,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+        @foreach($users as $user)
             <tr>
                 <td>{{ $user->id }}</td> 
                 <td>
@@ -46,4 +48,5 @@
             @endforeach
         </tbody>
     </table>
+</div>
 </x-layout>

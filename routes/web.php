@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,5 @@ Route::resource( 'user', UserController::class)
 Route::get('/landing', function () {
     return view('landing');
 });
+
+Route::resource('genero', GeneroController::class);

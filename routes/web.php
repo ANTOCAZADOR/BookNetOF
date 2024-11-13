@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\ReservarLibroController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route; 
@@ -34,3 +35,4 @@ Route::get('/landing', function () {
 });
 
 Route::resource('libro', LibroController::class);
+Route::resource('reserva', ReservarLibroController::class);

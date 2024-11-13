@@ -139,7 +139,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="/reserva">
                         <span class="sub-item">Tabla reserva libro</span>
                       </a>
                     </li>

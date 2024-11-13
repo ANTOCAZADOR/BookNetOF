@@ -5,8 +5,8 @@
     <h1>{{ $genero->name }}</h1>
     <form action="{{ route('genero.show', $genero) }}"method="POST">
     <ul>
-        <li>{{ $user->created_at }}</li>
-        <li>{{ $user->updated_at }}</li>
+        <li>{{ $genero->created_at }}</li>
+        <li>{{ $genero->updated_at }}</li>
     </ul>
 
     <a href="{{ route('genero.edit', $genero) }}">Editar</a><br>

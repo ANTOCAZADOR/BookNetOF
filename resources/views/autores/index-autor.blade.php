@@ -1,36 +1,40 @@
 <x-layout>
     <p>
-        <a href="{{ route('genero.create') }}">Registrar Genero</a>
+        <a href="{{ route('autor.create') }}">Registrar Autor</a>
     </p>
     <div class="card-body">
         <div class="card-sub">
-            Lista de generos en la base de datos:
+            Lista de autores en la base de datos:
         </div>
         <table class="table mt-3">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nacionalidad</th>
                     <th scope="col">Creado</th>
                     <th scope="col">Modificación</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($generos as $genero)
+                @foreach($autores as $autor)
                 <tr>
-                    <td>{{ $genero->id }}</td>
+                    <td>{{ $autor->id }}</td>
                     <td>
-                        <a href="{{ route('genero.show', $genero) }}">
-                            {{ $genero->name }}
+                        <a href="{{ route('autor.show', $autor) }}">
+                            {{ $autor->name }}
                         </a>
                     </td>
-                    <td>{{ $genero->created_at }}</td>
-                    <td>{{ $genero->updated_at }}</td>
+                    <td>{{ $autor->apellido }}</td>
+                    <td>{{ $autor->nacionalidad }}</td>
+                    <td>{{ $autor->created_at }}</td>
+                    <td>{{ $autor->updated_at }}</td>
                     <td>
                     @can('viewAdminDashboard', Auth::user())
-                    <form action="{{ route ('genero.destroy', $genero) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('genero.edit', $genero) }}">Editar</a>
+                    <form action="{{ route ('autor.destroy', $autor) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('autor.edit', $autor) }}">Editar</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Borrar</button>

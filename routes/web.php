@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutorController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -34,3 +35,5 @@ Route::get('/landing', function () {
 });
 
 Route::resource('genero', GeneroController::class);
+
+Route::resource('autor', AutorController::class);

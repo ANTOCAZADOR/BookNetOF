@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\ReservarLibroController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -36,3 +37,4 @@ Route::get('/landing', function () {
 
 Route::resource('libro', LibroController::class);
 Route::resource('reserva', ReservarLibroController::class);
+Route::resource('prestamo', PrestamoController::class);

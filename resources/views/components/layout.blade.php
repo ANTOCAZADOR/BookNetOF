@@ -134,7 +134,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="/prestamo">
                         <span class="sub-item">Tabla prestamo libro</span>
                       </a>
                     </li>

@@ -11,7 +11,7 @@ class UserPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    /*public function viewAny(User $user): bool
     {
         return $user->rol === 'administrator'; 
     }
@@ -68,6 +68,4 @@ class UserPolicy
     {
         return $user->rol === 'administrator'; // Devuelve true si el usuario es admin
     }
-
-
 }

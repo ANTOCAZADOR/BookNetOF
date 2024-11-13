@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\LibroController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; 
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -31,3 +32,5 @@ Route::resource( 'user', UserController::class)
 Route::get('/landing', function () {
     return view('landing');
 });
+
+Route::resource('libro', LibroController::class);

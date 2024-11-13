@@ -48,5 +48,5 @@
             @endforeach
         </tbody>
     </table>
-</div>
+    </div>
 </x-layout>

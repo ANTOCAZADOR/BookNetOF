@@ -1,10 +1,16 @@
 <?php
 
+
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\GeneroController;
+
+use App\Http\Controllers\LibroController;
+use App\Http\Controllers\PrestamoController;
+use App\Http\Controllers\ReservarLibroController;
+
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; 
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -37,3 +43,8 @@ Route::get('/landing', function () {
 Route::resource('genero', GeneroController::class);
 
 Route::resource('autor', AutorController::class);
+
+Route::resource('libro', LibroController::class);
+Route::resource('reserva', ReservarLibroController::class);
+Route::resource('prestamo', PrestamoController::class);
+

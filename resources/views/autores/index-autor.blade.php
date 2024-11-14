@@ -1,4 +1,5 @@
 <x-layout>
+    <h1>Lista de autores</h1>
     <p>
         <a href="{{ route('autor.create') }}">Registrar Autor</a>
     </p>

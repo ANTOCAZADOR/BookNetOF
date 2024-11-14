@@ -1,4 +1,5 @@
 <x-layout>
+    <h1>Lista de generos</h1>
     <p>
         <a href="{{ route('genero.create') }}">Registrar Genero</a>
     </p>

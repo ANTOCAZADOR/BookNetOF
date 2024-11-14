@@ -125,12 +125,12 @@
                     </li>
                     
                     <li>
-                      <a href="#">
+                      <a href="/autor">
                         <span class="sub-item">Tabla autor</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="/genero">
                         <span class="sub-item">Tabla genero</span>
                       </a>
                     </li>

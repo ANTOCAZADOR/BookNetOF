@@ -36,6 +36,18 @@
                 <label for="fechaPublicacion">Fecha:</label><br>
                 <input type="date" name="fechaPublicacion" id="fechaPublicacion" value="{{ old('fechaPublicacion') ?? $libro->fechaPublicacion}}">
 
+                <div class="card-body">
+                    <label for="generos">Géneros:</label><br>
+                    <select id="generos" name="generos[]" class="form-control" multiple>
+                        @foreach($generos as $genero)
+                            <option value="{{ $genero->id }}" 
+                                {{ in_array($genero->id, $libro->generos->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                {{ $genero->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Send</button>
         @else
             <p>Acceso denegado</p>

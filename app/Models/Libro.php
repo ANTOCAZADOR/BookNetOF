@@ -13,4 +13,10 @@ class Libro extends Model
 
     protected $fillable = ['id', 'titulo', 'autor', 'estatus', 'ISBN', 'editorial', 'fechaPublicacion'];
 
+    public function generos()
+    {
+        return $this->belongsToMany(Genero::class, 'libro_genero', 'libro_id', 'genero_id');
+    }
+
+
 }

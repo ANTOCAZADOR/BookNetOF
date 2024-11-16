@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Libro;
+use App\Models\Genero; 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -20,7 +21,7 @@ class LibroController extends Controller
      */
     public function index()
     {
-        $libros = Libro::all(); 
+        $libros = Libro::with(['generos'])->get(); 
         return view('libros.index-libro', compact('libros')); 
     }
 
@@ -29,7 +30,8 @@ class LibroController extends Controller
      */
     public function create()
     {
-        return view('libros.create-libro');
+        $generos = Genero::all(); // Obtiene todos los géneros
+        return view('libros.create-libro', compact('generos'));
     }
 
     /**
@@ -44,10 +46,14 @@ class LibroController extends Controller
             'ISBN' => ['required', 'max:255'],
             'editorial' => ['required', 'max:255'],
             'fechaPublicacion' => ['required'],
+            'generos' => 'array', // Validar como un arreglo
+            'generos.*' => 'exists:generos,id', // Cada ID debe existir en la tabla géneros
         ]); 
 
         $libro = Libro::create($request->all());
-        return redirect('/libro');
+
+        $libro->generos()->attach($request->generos);
+        return redirect()->route('libro.index')->with('success', 'Libro creado correctamente.');
     }
 
     /**
@@ -63,7 +69,8 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
-        return view('libros.edit-libro', compact('libro')); 
+        $generos = Genero::all(); 
+        return view('libros.edit-libro', compact('libro', 'generos')); 
     }
 
     /**
@@ -71,8 +78,31 @@ class LibroController extends Controller
      */
     public function update(Request $request, Libro $libro)
     {
-        $libro->update($request->all()); 
-        return redirect('/libro');
+        $validatedData = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'autor' => 'required|string|max:255',
+            'estatus' => 'required|string',
+            'ISBN' => 'required|string|max:13',
+            'editorial' => 'required|string|max:255',
+            'fechaPublicacion' => 'required|date',
+            'generos' => 'array', // Validar como un arreglo
+            'generos.*' => 'exists:generos,id', // Cada ID debe existir en la tabla géneros
+        ]);
+    
+        // Actualiza el libro
+        $libro->update([
+            'titulo' => $validatedData['titulo'],
+            'autor' => $validatedData['autor'],
+            'estatus' => $validatedData['estatus'],
+            'isbn' => $validatedData['ISBN'],
+            'editorial' => $validatedData['editorial'],
+            'fechaPublicacion' => $validatedData['fechaPublicacion'],
+        ]);
+    
+        // Sincroniza los géneros seleccionados
+        $libro->generos()->sync($validatedData['generos'] ?? []);
+    
+        return redirect()->route('libro.index')->with('success', 'Libro actualizado correctamente.');
     }
 
     /**

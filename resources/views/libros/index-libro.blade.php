@@ -17,7 +17,7 @@
                 <th scope="col">ISBN</th>
                 <th scope="col">Editorial</th>
                 <th scope="col">Fecha de publicación</th>
-                <th scope="col">Etiquetas</th>
+                <th scope="col">Generos</th>
                 <th scope="col">Creado</th>
                 <th scope="col">Modificado</th>
                 <th scope="col">Acciones</th>
@@ -37,7 +37,11 @@
                 <td>{{ $libro->ISBN }}</td>
                 <td>{{ $libro->editorial }}</td>
                 <td>{{ $libro->fechaPublicacion }}</td>
-                <td>{{ $libro->etiqueta }}</td>
+                <td>
+                    @foreach ($libro->generos as $genero)
+                        <li>{{ $genero->name }}</li>
+                    @endforeach
+                </td>
                 <td>{{ $libro->created_at }}</td>
                 <td>{{ $libro->updated_at }}</td>
                 <td>

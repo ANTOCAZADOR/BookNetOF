@@ -11,6 +11,9 @@
         <li>{{ $libro->fechaPublicacion }}</li>
         <li>{{ $libro->created_at }}</li>
         <li>{{ $libro->updated_at }}</li>
+        @foreach ($libro->generos as $genero)
+            <li>{{ $genero->name }}</li>
+        @endforeach
     </ul>
 
     <a href="{{ route('libro.edit', $libro) }}">Editar</a><br>

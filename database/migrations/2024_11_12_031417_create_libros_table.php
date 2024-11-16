@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('ISBN'); //ISBN de 13 caracteres
             $table->string('editorial');
             $table->date('fechaPublicacion'); //Solo para almacenar la fecha 
+            $table->string('genero'); 
             $table->timestamps();
             $table->softDeletes();
         });

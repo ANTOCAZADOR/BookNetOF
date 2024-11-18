@@ -67,8 +67,9 @@ class ReservarLibroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ReservarLibro $reservarLibro)
+    public function update(Request $request, ReservarLibro $reservarLibro, $id)
     {
+        $reservarLibro = ReservarLibro::findOrFail($id);
         $reservarLibro->update($request->all());
         return redirect('/reserva');
     }

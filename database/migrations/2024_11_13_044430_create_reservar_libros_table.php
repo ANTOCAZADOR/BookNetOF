@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('reservar_libros', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('libro_id')->constrained()->onDelete('cascade');
             $table->date('fechaReserva');
             $table->date('fechaDevolucionR');
-            $table->enum('estatus', ['disponible', 'noDisponible']);
+            $table->enum('estatus', ['disponible', 'noDisponible'])->default('disponible');
             $table->timestamps();
             $table->softDeletes(); 
         });

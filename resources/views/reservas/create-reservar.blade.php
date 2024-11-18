@@ -5,28 +5,19 @@
             <h1>Crear reserva</h1>
             <form action="{{ route('reserva.store') }}" method="POST">
                 @csrf
-
-                <div>
-                    <label for="fechaReserva">Fecha de reserva:</label><br>
-                    <input type="date" name="fechaReserva" id="fechaReserva" value="{{ old('fechaReserva') }}">
-                </div>
-                <br>
-
-                <div>
-                    <label for="fechaDevolucionR">Fecha de devolución:</label><br>
-                    <input type="date" name="fechaDevolucionR" id="fechaDevolucionR" value="{{ old('fechaDevolucionR') }}">
-                </div>
-                <br>
-
-                <div>
-                    <label for="estatus">Estatus:</label><br>
-                    <select id="estatus" name="estatus">
-                        <option value="disponible">disponible</option>
-                        <option value="noDisponible">noDisponible</option>
+                    <label for="user_id">Usuario:</label>
+                    <select name="user_id" id="user_id">
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
                     </select>
-                </div>
-                <br>
 
+                    <label for="libro_id">Libro:</label>
+                    <select name="libro_id" id="libro_id">
+                        @foreach($libros as $libro)
+                            <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
+                        @endforeach
+                    </select>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
         @else

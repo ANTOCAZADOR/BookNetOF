@@ -6,11 +6,19 @@
         <form action="{{ route('prestamo.store') }}"method="POST">
             @csrf
 
-                <label for="fechaPrestamo">Fecha Prestamo:</label><br>
-                <input type="date" name="fechaPrestamo" id="fechaPrestamo" value="{{ old('fechaPrestamo') }}">
+                <label for="user_id">Usuario:</label>
+                <select name="user_id" id="user_id">
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
 
-                <br><label for="fechaDevolucionP">Fecha Devolucion:</label><br>
-                <input type="date" name="fechaDevolucionP" id="fechaDevolucionP" value="{{ old('fechaDevolucionP') }}">
+                <label for="libro_id">Libro:</label>
+                <select name="libro_id" id="libro_id">
+                    @foreach($libros as $libro)
+                        <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
+                    @endforeach
+                </select>
 
                 <br><button type="submit" class="btn btn-primary">Send</button>
         @else

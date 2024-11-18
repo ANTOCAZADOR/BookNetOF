@@ -11,26 +11,22 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Fecha del prestamo</th>
-                <th scope="col">Fecha de devolución</th>
-                <th scope="col">Creado</th>
-                <th scope="col">Modificado</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Libro</th>
+                <th scope="col">Fecha de Préstamo</th>
+                <th scope="col">Fecha de Devolución</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($prestamos as $prestamo)
-            <tr>
-                <td>
-                    <a href="{{ route('prestamo.show', $prestamo) }}">
-                    {{ $prestamo->id}}
-                    </a>
-                </td> 
-                <td>{{ $prestamo->fechaPrestamo }}</td>
-                <td>{{ $prestamo->fechaDevolucionP }}</td>
-                <td>{{ $prestamo->created_at }}</td>
-                <td>{{ $prestamo->updated_at }}</td>
-                <td>
+            @foreach ($prestamos as $prestamo)
+                <tr>
+                    <td>{{ $prestamo->id }}</td>
+                    <td>{{ $prestamo->user->name ?? 'Sin usuario' }}</td>
+                    <td>{{ $prestamo->libro->titulo ?? 'Sin libro' }}</td>
+                    <td>{{ $prestamo->fechaPrestamo }}</td>
+                    <td>{{ $prestamo->fechaDevolucionP }}</td>
+                    <td>
                     @can('viewAdminDashboard', Auth::user())
                     <form action="{{ route ('prestamo.destroy', $prestamo) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('prestamo.edit', $prestamo) }}">Editar</a>
@@ -39,8 +35,8 @@
                     <button type="submit" class="btn btn-danger">Borrar</button>
                     </form>
                     @endcan
-                </td>
-            </tr>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>

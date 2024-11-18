@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Libro;
 use App\Models\ReservarLibro;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -19,7 +21,8 @@ class ReservarLibroController extends Controller
      */
     public function index()
     {
-        $reservarLibros = ReservarLibro::all(); 
+        $reservarLibros = ReservarLibro::with(['user', 'libro'])->get(); 
+        //$reservarLibros2 = ReservarLibro::with(['libros'])->get(); 
         return view('reservas.index-reservar', compact('reservarLibros'));
     }
 
@@ -28,7 +31,9 @@ class ReservarLibroController extends Controller
      */
     public function create()
     {
-        return view('reservas.create-reservar');
+        $users= User::all(); 
+        $libros = Libro::all(); 
+        return view('reservas.create-reservar', compact('users', 'libros'));
     }
 
     /**
@@ -37,13 +42,14 @@ class ReservarLibroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fechaReserva' => ['required'],
-            'fechaDevolucionR' => ['required'],
-            'estatus' => 'required|string|in:disponible,noDisponible',
+            'user_id' => 'required|exists:users,id',
+            'libro_id' => 'required|exists:libros,id',
         ]); 
 
-        $reserva = ReservarLibro::create($request->all());
-        return redirect('/reserva');
+        ReservarLibro::create($request->only(['user_id', 'libro_id']));
+
+        return redirect()->route('reserva.index')->with('success', 'Reserva creada exitosamente.');
+        
     }
 
     /**
@@ -60,8 +66,10 @@ class ReservarLibroController extends Controller
      */
     public function edit(ReservarLibro $reservarLibro, $id)
     {
+        $users= User::all(); 
+        $libros = Libro::all(); 
         $reservarLibro = ReservarLibro::findOrFail($id);
-        return view('reservas.edit-reservar', compact('reservarLibro'));
+        return view('reservas.edit-reservar', compact('reservarLibro', 'users'. 'libros'));
     }
 
     /**

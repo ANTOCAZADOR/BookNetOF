@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prestamo;
+use App\Models\User;
+use App\Models\Libro;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Http\Request;
 
@@ -21,7 +23,8 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        $prestamos = Prestamo::all(); 
+        $prestamos = Prestamo::with(['user', 'libro'])->get(); 
+        //$prestamos2 = Prestamo::with(['libro'])->get(); 
         return view('prestamos.index-prestamo', compact('prestamos') );
     }
 
@@ -30,7 +33,9 @@ class PrestamoController extends Controller
      */
     public function create()
     {
-        return view('prestamos.create-prestamo');
+        $users= User::all(); 
+        $libros = Libro::all(); 
+        return view('prestamos.create-prestamo', compact('users', 'libros'));
     }
 
     /**
@@ -39,12 +44,13 @@ class PrestamoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fechaPrestamo' => ['required'],
-            'fechaDevolucionP' => ['required'],
-        ]); 
+            'user_id' => 'required|exists:users,id',
+            'libro_id' => 'required|exists:libros,id',
+        ]);
 
-        $prestamo = Prestamo::create($request->all());
-        return redirect('/prestamo'); 
+        Prestamo::create($request->only(['user_id', 'libro_id']));
+
+        return redirect()->route('prestamo.index')->with('success', 'Préstamo creado exitosamente.');
     }
 
     /**
@@ -60,7 +66,9 @@ class PrestamoController extends Controller
      */
     public function edit(Prestamo $prestamo)
     {
-        return view('prestamos.edit-prestamo', compact('prestamo')); 
+        $users= User::all(); 
+        $libros = Libro::all(); 
+        return view('prestamos.edit-prestamo', compact('prestamo', 'users', 'libros')); 
     }
 
     /**

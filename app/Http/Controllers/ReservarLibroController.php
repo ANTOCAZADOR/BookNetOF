@@ -7,6 +7,8 @@ use App\Models\ReservarLibro;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
+use App\Mail\ReservaConfirmada;
+use Illuminate\Support\Facades\Mail;
 
 class ReservarLibroController extends Controller
 {
@@ -46,9 +48,16 @@ class ReservarLibroController extends Controller
             'libro_id' => 'required|exists:libros,id',
         ]); 
 
-        ReservarLibro::create($request->only(['user_id', 'libro_id']));
+        // Crear la reserva
+        $reserva = ReservarLibro::create($request->only(['user_id', 'libro_id']));
+        
+        // Obtener el usuario relacionado con la reserva
+        $usuario = $reserva->user;
 
-        return redirect()->route('reserva.index')->with('success', 'Reserva creada exitosamente.');
+        // Enviar el correo de confirmación de la reserva
+        Mail::to($usuario->email)->send(new ReservaConfirmada($reserva));
+
+        return redirect()->route('reserva.index')->with('success', 'Reserva creada exitosamente y notificacion enviada.');
         
     }
 

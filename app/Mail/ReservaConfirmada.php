@@ -12,13 +12,14 @@ use Illuminate\Queue\SerializesModels;
 class ReservaConfirmada extends Mailable
 {
     use Queueable, SerializesModels;
-
+    
+    public $reserva; 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($reserva)
     {
-        //
+        $this->reserva = $reserva;
     }
 
     /**
@@ -27,7 +28,7 @@ class ReservaConfirmada extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reserva Confirmada',
+            subject: 'Confirmación de tu reserva',
         );
     }
 
@@ -37,7 +38,7 @@ class ReservaConfirmada extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.reserva-confirmada',
         );
     }
 

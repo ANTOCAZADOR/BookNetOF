@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReservaConfirmada;
 use App\Models\Libro;
 use App\Models\ReservarLibro;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class ReservarLibroController extends Controller
 {
@@ -57,16 +59,19 @@ class ReservarLibroController extends Controller
         }
 
         // Crear la reserva
-        ReservarLibro::create([
+        $reserva = ReservarLibro::create([
             'user_id' => $request->user_id,
             'libro_id' => $request->libro_id,
             'fechaReserva' => Carbon::now(),
             'fechaDevolucionR' => Carbon::now()->addDays(2),
             'estatus' => 'noDisponible',
         ]);
-
         // Actualizar el estatus del libro
         $libro->update(['estatus' => 'noDisponible']);
+        
+        $usuario = $reserva->user;
+
+        Mail::to($usuario->email)->send(new ReservaConfirmada($reserva));
 
         return redirect()->back()->with('success', 'Libro reservado exitosamente.');
         

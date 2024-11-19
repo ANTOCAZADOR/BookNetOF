@@ -7,6 +7,7 @@ use App\Models\ReservarLibro;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Carbon;
 
 class ReservarLibroController extends Controller
 {
@@ -41,14 +42,33 @@ class ReservarLibroController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar que los datos requeridos existan
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'libro_id' => 'required|exists:libros,id',
-        ]); 
+        ]);
 
-        ReservarLibro::create($request->only(['user_id', 'libro_id']));
+        // Obtener el libro
+        $libro = Libro::findOrFail($request->libro_id);
 
-        return redirect()->route('reserva.index')->with('success', 'Reserva creada exitosamente.');
+        // Verificar si el libro está disponible
+        if ($libro->estatus !== 'disponible') {
+            return redirect()->back()->with('error', 'El libro no está disponible.');
+        }
+
+        // Crear la reserva
+        ReservarLibro::create([
+            'user_id' => $request->user_id,
+            'libro_id' => $request->libro_id,
+            'fechaReserva' => Carbon::now(),
+            'fechaDevolucionR' => Carbon::now()->addDays(2),
+            'estatus' => 'noDisponible',
+        ]);
+
+        // Actualizar el estatus del libro
+        $libro->update(['estatus' => 'noDisponible']);
+
+        return redirect()->back()->with('success', 'Libro reservado exitosamente.');
         
     }
 
@@ -66,10 +86,8 @@ class ReservarLibroController extends Controller
      */
     public function edit(ReservarLibro $reservarLibro, $id)
     {
-        $users= User::all(); 
-        $libros = Libro::all(); 
         $reservarLibro = ReservarLibro::findOrFail($id);
-        return view('reservas.edit-reservar', compact('reservarLibro', 'users'. 'libros'));
+        return view('reservas.edit-reservar', compact('reservarLibro'));
     }
 
     /**

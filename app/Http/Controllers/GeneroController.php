@@ -49,6 +49,7 @@ class GeneroController extends Controller
      */
     public function show(Genero $genero)
     {
+        $genero->load('libros');
         return view('generos.show-genero', compact('genero'));
     }
 

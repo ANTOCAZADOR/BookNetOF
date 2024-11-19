@@ -35,7 +35,7 @@
                         <td>
                         @can('viewAdminDashboard', Auth::user())
                         <form action="{{ route ('reserva.destroy', $reservarLibro->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('prestamo.edit', $reservarLibro->id) }}">Editar</a>
+                        <a class="btn btn-info" href="{{ route('reserva.edit', $reservarLibro->id) }}">Editar</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Borrar</button>

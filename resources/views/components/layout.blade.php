@@ -53,7 +53,7 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="/user" class="logo">
+            <a href="/inicio" class="logo">
               <img
                 src="{{ asset('assets/img/kaiadmin/logo_light.png') }}"
                 alt="navbar brand"
@@ -92,7 +92,7 @@
                 <div class="collapse" id="dashboard">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="../demo1/index.html">
+                      <a href="/inicio">
                         <span class="sub-item">Dashboard 1</span>
                       </a>
                     </li>
@@ -103,7 +103,39 @@
                 <span class="sidebar-mini-icon">
                   <i class="fa fa-ellipsis-h"></i>
                 </span>
-                <h4 class="text-section">Components</h4>
+                <h4 class="text-section">Usuario</h4>
+              </li>
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#submenu">
+                  <i class="fas fa-bars"></i>
+                  <p>Menu</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="submenu">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="/libro">
+                        <span class="sub-item">Ver libros</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/reserva">
+                        <span class="sub-item">Ver reservas</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/prestamo">
+                        <span class="sub-item">Ver prestamos</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                  <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Administrador</h4>
               </li>
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
@@ -150,7 +182,7 @@
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarLayouts">
                   <i class="fas fa-th-list"></i>
-                  <p>Sidebar Layouts</p>
+                  <p>Administrator</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="sidebarLayouts">
@@ -185,80 +217,17 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#tables">
-                  <i class="fas fa-table"></i>
-                  <p>Tables</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="tables">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="tables/tables.html">
-                        <span class="sub-item">Basic Table</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="tables/datatables.html">
-                        <span class="sub-item">Datatables</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#maps">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <p>Maps</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="maps">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="maps/googlemaps.html">
-                        <span class="sub-item">Google Maps</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="maps/jsvectormap.html">
-                        <span class="sub-item">Jsvectormap</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#charts">
-                  <i class="far fa-chart-bar"></i>
-                  <p>Charts</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="charts">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="charts/charts.html">
-                        <span class="sub-item">Chart Js</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="charts/sparkline.html">
-                        <span class="sub-item">Sparkline</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
                 <a href="widgets.html">
                   <i class="fas fa-desktop"></i>
                   <p>Widgets</p>
-                  <span class="badge badge-success">4</span>
+                  <span class="badge badge-success"></span>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../../documentation/index.html">
                   <i class="fas fa-file"></i>
                   <p>Documentation</p>
-                  <span class="badge badge-secondary">1</span>
+                  <span class="badge badge-secondary"></span>
                 </a>
               </li>
               <li class="nav-item">
@@ -656,41 +625,52 @@
                       />
                     </div>
                     <span class="profile-username">
-                      <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Hizrian</span>
+                        <span class="op-7">Hola,</span>
+                        @auth
+                            <span class="fw-bold">{{ auth()->user()->name }}</span>
+                        @else
+                            <span class="fw-bold">Invitado</span>
+                        @endauth
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                       <li>
-                        <div class="user-box">
-                          <div class="avatar-lg">
-                            <img
-                              src="{{ asset('assets/img/profile.jpg') }}"
-                              alt="image profile"
-                              class="avatar-img rounded"
-                            />
+                          <div class="user-box">
+                              <div class="avatar-lg">
+                                  <img
+                                      src="{{ asset('assets/img/profile.jpg') }}"
+                                      alt="image profile"
+                                      class="avatar-img rounded"
+                                  />
+                              </div>
+                              <div class="u-text">
+                                  <!-- Verificar si hay un usuario autenticado -->
+                                  @auth
+                                      <h4>{{ auth()->user()->name }}</h4>
+                                      <p class="text-muted">{{ auth()->user()->email }}</p>
+                                  @else
+                                      <h4>Invitado</h4>
+                                      <p class="text-muted">Sin correo</p>
+                                  @endauth
+                              </div>
                           </div>
-                          <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <p class="text-muted">hello@example.com</p>
-                            <a
-                              href="profile.html"
-                              class="btn btn-xs btn-secondary btn-sm"
-                              >View Profile</a
-                            >
-                          </div>
-                        </div>
                       </li>
-                      <li>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">My Balance</a>
-                        <a class="dropdown-item" href="#">Inbox</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Account Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
+
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="/user/profile">Mi Perfil</a>
+                          <div class="dropdown-divider"></div>
+
+                          <!-- Enlace de Logout -->
+                          <a class="dropdown-item" href="{{ route('logout') }}" 
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Cerrar sesión
+                          </a>
+
+                          <!-- Formulario de Logout -->
+                          <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
+                              @csrf
+                          </form>
                       </li>
                     </div>
                   </ul>

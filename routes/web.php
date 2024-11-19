@@ -47,4 +47,6 @@ Route::resource('autor', AutorController::class);
 Route::resource('libro', LibroController::class);
 Route::resource('reserva', ReservarLibroController::class);
 Route::resource('prestamo', PrestamoController::class);
-
+Route::get('/inicio', function () {
+    return view('presentacion'); // Retorna la vista "resources/views/presentacion.blade.php"
+});

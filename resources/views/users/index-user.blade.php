@@ -1,4 +1,5 @@
 <x-layout>
+    @can('viewAdminDashboard', Auth::user())
     <h1>Lista de Usuarios</h1>
     <p>
         <a href="{{ route('user.create') }}">Registrar Usuario</a>
@@ -49,4 +50,5 @@
         </tbody>
     </table>
     </div>
+    @endcan
 </x-layout>

@@ -21,6 +21,7 @@
                 <th scope="col">Creado</th>
                 <th scope="col">Modificado</th>
                 <th scope="col">Acciones</th>
+                <th scope="col">Reservar</th>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +54,18 @@
                     <button type="submit" class="btn btn-danger">Borrar</button>
                     </form>
                     @endcan
+                </td>
+                <td>
+                    @if($libro->estatus === 'disponible')
+                        <form action="{{ route('reserva.store') }}" method="POST" style="display:inline;">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                            <input type="hidden" name="libro_id" value="{{ $libro->id }}">
+                            <button type="submit" class="btn btn-warning">Reservar</button>
+                        </form>
+                    @else
+                        <span class="text-muted">No disponible</span>
+                    @endif
                 </td>
             </tr>
             @endforeach

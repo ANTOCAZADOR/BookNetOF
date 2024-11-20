@@ -50,3 +50,4 @@ Route::resource('prestamo', PrestamoController::class);
 Route::get('/inicio', function () {
     return view('presentacion'); // Retorna la vista "resources/views/presentacion.blade.php"
 });
+Route::post('/reservas/cancelar/{id}', [ReservarLibroController::class, 'cancelarReserva'])->name('reserva.cancelar');

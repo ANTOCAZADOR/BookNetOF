@@ -114,4 +114,20 @@ class ReservarLibroController extends Controller
         $reservarLibro->delete();
         return redirect('/reserva');
     }
+
+    public function cancelarReserva(Request $request, $id)
+    {
+        // Buscar la reserva
+        $reserva = ReservarLibro::where('libro_id', $id)->firstOrFail();
+
+        // Actualizar el estatus del libro a "disponible"
+        $libro = $reserva->libro;
+        $libro->update(['estatus' => 'disponible']);
+
+        // Eliminar la reserva
+        $reserva->delete();
+
+        return redirect()->back()->with('success', 'Reserva cancelada exitosamente.');
+    }
+
 }

@@ -67,6 +67,16 @@
                         <span class="text-muted">No disponible</span>
                     @endif
                 </td>
+                <td>
+                    @if($libro->estatus === 'noDisponible')
+                        <form action="{{ route('reserva.cancelar', $libro->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Cancelar reserva</button>
+                        </form>
+                    @else
+                        <span class="text-muted">Disponible</span>
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>

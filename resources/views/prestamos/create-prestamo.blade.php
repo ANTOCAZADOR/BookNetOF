@@ -9,7 +9,7 @@
                 <label for="user_id">Usuario:</label>
                 <select name="user_id" id="user_id">
                     @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name && $user->id}}</option>
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
                 </select>
 

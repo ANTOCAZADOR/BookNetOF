@@ -22,6 +22,7 @@
                 <th scope="col">Modificado</th>
                 <th scope="col">Acciones</th>
                 <th scope="col">Reservar</th>
+                <th scope="col">Cancelar reserva</th>
             </tr>
         </thead>
         <tbody>

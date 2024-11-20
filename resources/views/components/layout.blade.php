@@ -93,7 +93,7 @@
                   <ul class="nav nav-collapse">
                     <li>
                       <a href="/inicio">
-                        <span class="sub-item">Dashboard 1</span>
+                        <span class="sub-item">Pagina principal</span>
                       </a>
                     </li>
                   </ul>
@@ -570,7 +570,7 @@
                   >
                     <div class="avatar-sm">
                       <img
-                        src="{{ asset('assets/img/profile.jpg') }}"
+                        src="{{ asset('assets/img/usuario.png') }}"
                         alt="..."
                         class="avatar-img rounded-circle"
                       />
@@ -590,7 +590,7 @@
                           <div class="user-box">
                               <div class="avatar-lg">
                                   <img
-                                      src="{{ asset('assets/img/profile.jpg') }}"
+                                      src="{{ asset('assets/img/usuario.png') }}"
                                       alt="image profile"
                                       class="avatar-img rounded"
                                   />

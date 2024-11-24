@@ -17,25 +17,58 @@
                         <h4>Detalles del Autor</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('autor.store') }}" method="POST">
+                        <form action="{{ route('autor.store') }}" method="POST" class="needs-validation" novalidate>
                             @csrf
 
                             <!-- Campo Nombre -->
                             <div class="mb-4">
                                 <label for="name" class="form-label">Nombre:</label>
-                                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                                <input 
+                                type="text" 
+                                name="name" 
+                                class="form-control" 
+                                value="{{ old('name') }}"
+                                required> <!--Le añadí esto a la validación lo de required-->
+                                <div class="valid-feedback"> <!--Le añadí esto a la validación-->
+                                    campo validado
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo nombre obligatorio
+                                </div>
                             </div>
 
                             <!-- Campo Apellido -->
                             <div class="mb-4">
                                 <label for="apellido" class="form-label">Apellido:</label>
-                                <input type="text" name="apellido" class="form-control" value="{{ old('apellido') }}">
+                                <input 
+                                type="text" 
+                                name="apellido" 
+                                class="form-control" 
+                                value="{{ old('apellido') }}"
+                                required> <!--Le añadí esto a la validación lo de required-->
+                                <div class="valid-feedback"> <!--Le añadí esto a la validación-->
+                                    campo validado
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo apellido obligatorio
+                                </div>
                             </div>
 
                             <!-- Campo Nacionalidad -->
                             <div class="mb-4">
                                 <label for="nacionalidad" class="form-label">Nacionalidad:</label>
-                                <input type="text" name="nacionalidad" class="form-control" value="{{ old('nacionalidad') }}">
+                                <input 
+                                type="text" 
+                                name="nacionalidad" 
+                                class="form-control" 
+                                value="{{ old('nacionalidad') }}"
+                                required> <!--Le añadí esto a la validación lo de required-->
+                                <div class="valid-feedback"> <!--Le añadí esto a la validación-->
+                                    campo validado
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo nacionalidad obligatorio
+                                </div>
                             </div>
 
                             <!-- Botón Enviar -->

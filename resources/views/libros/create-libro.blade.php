@@ -11,10 +11,10 @@
         @can('viewAdminDashboard', Auth::user())
         <!-- Formulario -->
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
+            <!--<div class="col-lg-8 col-md-10">-->
                 <div class="card shadow-lg border-0">
                     <div class="card-body p-4">
-                        <form action="{{ route('libro.store') }}" method="POST">
+                        <form action="{{ route('libro.store') }}" method="POST" class="needs-validation" novalidate> <!--Le añadí esto a la validación lo de -> class="needs-validation" novalidate -->
                             @csrf
 
                             <!-- Campo Título -->
@@ -25,7 +25,14 @@
                                     name="titulo" 
                                     class="form-control form-control-lg" 
                                     value="{{ old('titulo') }}" 
-                                    placeholder="Ingresa el título del libro">
+                                    placeholder="Ingresa el título del libro"
+                                    required> <!--Le añadí esto a la validación lo de required-->
+                                <div class="valid-feedback"> <!--Le añadí esto a la validación-->
+                                    campo validado
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo título obligatorio
+                                </div>
                             </div>
 
                             <!-- Campo Autor -->
@@ -36,16 +43,25 @@
                                     name="autor" 
                                     class="form-control form-control-lg" 
                                     value="{{ old('autor') }}" 
-                                    placeholder="Ingresa el nombre del autor">
+                                    placeholder="Ingresa el nombre del autor"
+                                    required>
+                                <div class="valid-feedback"> <!--Le añadí esto a la validación-->
+                                    campo validado
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo autor obligatorio
+                                </div>
                             </div>
 
                             <!-- Campo Estatus -->
                             <div class="mb-4">
                                 <label for="estatus" class="form-label fs-4 fw-bold">Estatus</label>
-                                <select id="estatus" name="estatus" class="form-select form-select-lg">
+                                <select id="estatus" name="estatus" class="form-select form-select-lg needs-validation" required>
+                                    <option value="" disabled {{ old('estatus') == '' ? 'selected' : '' }}>Seleccione un estatus</option>
                                     <option value="disponible" {{ old('estatus') == 'disponible' ? 'selected' : '' }}>Disponible</option>
                                     <option value="noDisponible" {{ old('estatus') == 'noDisponible' ? 'selected' : '' }}>No Disponible</option>
                                 </select>
+                                <div class="invalid-feedback">Este campo es obligatorio.</div>
                             </div>
 
                             <!-- Campo ISBN -->
@@ -56,7 +72,14 @@
                                     name="ISBN" 
                                     class="form-control form-control-lg" 
                                     value="{{ old('ISBN') }}" 
-                                    placeholder="Ingresa el número ISBN del libro">
+                                    placeholder="Ingresa el número ISBN del libro"
+                                    required>
+                                <div class="valid-feedback"> <!--Le añadí esto a la validación-->
+                                    campo validado
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo ISBN obligatorio
+                                </div>
                             </div>
 
                             <!-- Campo Editorial -->
@@ -67,7 +90,14 @@
                                     name="editorial" 
                                     class="form-control form-control-lg" 
                                     value="{{ old('editorial') }}" 
-                                    placeholder="Ingresa la editorial del libro">
+                                    placeholder="Ingresa la editorial del libro"
+                                    required>
+                                <div class="valid-feedback"> <!--Le añadí esto a la validación-->
+                                    campo validado
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo editorial obligatorio
+                                </div>
                             </div>
 
                             <!-- Campo Fecha de Publicación -->
@@ -78,19 +108,28 @@
                                     name="fechaPublicacion" 
                                     id="fechaPublicacion" 
                                     class="form-control form-control-lg" 
-                                    value="{{ old('fechaPublicacion') }}">
+                                    value="{{ old('fechaPublicacion') }}"
+                                    required>
+                                <div class="valid-feedback"> <!--Le añadí esto a la validación-->
+                                    campo validado
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo date obligatorio
+                                </div>
                             </div>
 
                             <!-- Campo Géneros -->
                             <div class="mb-4">
                                 <label for="generos" class="form-label fs-4 fw-bold">Géneros</label>
-                                <select id="generos" name="generos[]" class="form-control form-control-lg" multiple>
+                                <select id="generos" name="generos[]" class="form-select form-select-lg needs-validation" required>
+                                    <option value="">Selecciona un género</option>    
                                     @foreach($generos as $genero)
                                         <option value="{{ $genero->id }}" {{ in_array($genero->id, old('generos', [])) ? 'selected' : '' }}>
                                             {{ $genero->name }}
                                         </option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">Por favor, selecciona al menos un género.</div>
                                 <small class="text-muted">Selecciona uno o más géneros para este libro.</small>
                             </div>
 
@@ -118,4 +157,5 @@
         </div>
         @endcan
     </div>
+    
 </x-layout>

@@ -1,29 +1,45 @@
 <x-layout>
     <body>
-    <title>Crear prestamo</title>
-        @can('viewAdminDashboard', Auth::user())
-        <h1>Create Prestamo</h1>
-        <form action="{{ route('prestamo.store') }}"method="POST">
-            @csrf
+        <title>Crear préstamo</title>
+            @can('viewAdminDashboard', Auth::user())
+                <h1>Crear Préstamo</h1>
+                <form action="{{ route('prestamo.store') }}" method="POST" class="needs-validation" novalidate>
+                    @csrf
 
-                <label for="user_id">Usuario:</label>
-                <select name="user_id" id="user_id">
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
+                    <!-- Campo Usuario -->
+                    <div class="mb-4">
+                        <label for="user_id" class="form-label">Usuario:</label>
+                        <select name="user_id" id="user_id" class="form-select" required>
+                            <option value="">Selecciona un usuario</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                    {{ $user->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecciona un usuario.</div>
+                    </div>
 
-                <label for="libro_id">Libro:</label>
-                <select name="libro_id" id="libro_id">
-                    @foreach($libros as $libro)
-                        <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
-                    @endforeach
-                </select>
+                    <!-- Campo Libro -->
+                    <div class="mb-4">
+                        <label for="libro_id" class="form-label">Libro:</label>
+                        <select name="libro_id" id="libro_id" class="form-select" required>
+                            <option value="">Selecciona un libro</option>
+                            @foreach($libros as $libro)
+                                <option value="{{ $libro->id }}" {{ old('libro_id') == $libro->id ? 'selected' : '' }}>
+                                    {{ $libro->titulo }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecciona un libro.</div>
+                    </div>
 
-                <br><button type="submit" class="btn btn-primary">Send</button>
-        @else
-            <p>Acceso denegado</p>
-            <a href="/prestamo" class="btn btn-primary">Aceptar</a>
-        @endcan
+                    <!-- Botón Enviar -->
+                    <button type="submit" class="btn btn-primary">Guardar Préstamo</button>
+                </form>
+            @else
+                <p>Acceso denegado</p>
+                <a href="/prestamo" class="btn btn-primary">Aceptar</a>
+            @endcan
     </body>
 </x-layout>

@@ -612,6 +612,12 @@
                           <a class="dropdown-item" href="/user/profile">Mi Perfil</a>
                           <div class="dropdown-divider"></div>
 
+                          <!-- Enlace de login -->
+                          <a class="dropdown-item" href="{{ route('login') }}" 
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Iniciar sesión
+                          </a>
+
                           <!-- Enlace de Logout -->
                           <a class="dropdown-item" href="{{ route('logout') }}" 
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

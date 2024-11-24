@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\GeneroController;
 
@@ -51,3 +51,11 @@ Route::get('/inicio', function () {
 Route::post('/reservas/cancelar/{id}', [ReservarLibroController::class, 'cancelarReserva'])->name('reserva.cancelar');
 
 Route::resource('autor', AutorController::class); 
+
+//Aquí esta lo relacionado con archivos: 
+Route::get('/archivos', [ArchivoController::class, 'index'])->name('archivos.index');
+Route::post('/archivos', [ArchivoController::class, 'store'])->name('archivos.store');
+Route::get('/archivos/{archivo}', [ArchivoController::class, 'show'])->name('archivos.show');
+Route::delete('/archivos/{archivo}', [ArchivoController::class, 'destroy'])->name('archivos.destroy');
+Route::get('/archivos/{archivo}/edit', [ArchivoController::class, 'edit'])->name('archivos.edit');
+Route::put('/archivos/{archivo}', [ArchivoController::class, 'update'])->name('archivos.update');

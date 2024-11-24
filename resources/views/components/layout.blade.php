@@ -128,6 +128,11 @@
                         <span class="sub-item">Ver prestamos</span>
                       </a>
                     </li>
+                    <li>
+                      <a href="/archivos">
+                        <span class="sub-item">Reglas</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -175,6 +180,11 @@
                     <li>
                       <a href="/reserva">
                         <span class="sub-item">Tabla reserva libro</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/archivos">
+                        <span class="sub-item">Archivos</span>
                       </a>
                     </li>
                   </ul>

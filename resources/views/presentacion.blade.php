@@ -3,16 +3,16 @@
 
     <div class="container">
         <!-- Banner Principal -->
-        <section class="py-5 text-center bg-light rounded shadow-sm">
+        <section class="py-5 text-center bg-fondo rounded shadow-sm">
             <div>
                 <img src="{{ asset('assets/img/kaiadmin/logo_light.png') }}" alt="Logo BokNetOF" class="mb-4" style="max-width: 100px;">
-                <h1 class="display-5 fw-bold">Bienvenido a BokNetOF</h1>
+                <h1 class="display-5 fw-bold">Bienvenido a BookNetOF</h1>
                 <p class="lead text-muted">Tu biblioteca digital favorita</p>
             </div>
         </section>
 
         <!-- Sección de Introducción -->
-        <section class="my-5">
+        <section class="my-5 bg-fondo">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h2 class="fw-bold">Explora, Reserva y Aprende</h2>
@@ -26,13 +26,13 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src="{{ asset('assets/img/persona.jpg') }}" alt="Libros" class="img-fluid rounded shadow">
+                    <img src="{{ asset('assets/img/personaleyendo5.jpg') }}" alt="Libros" class="img-fluid rounded shadow">
                 </div>
             </div>
         </section>
 
         <!-- Libros Destacados -->
-        <section class="py-5">
+        <section class="py-5 bg-fondo">
             <h2 class="text-center mb-4 fw-bold">Libros Destacados</h2>
             <div class="row">
                 <!-- Tarjeta de Libro -->

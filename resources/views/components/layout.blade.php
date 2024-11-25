@@ -747,5 +747,17 @@
                     })
             })()
         </script>
+        <style>
+                .bg-fondo {
+          background-image: url('/assets/img/fondolibreria.jpg'); /* Ruta de tu imagen */
+          background-size: cover; /* Asegura que la imagen cubra toda la sección */
+          background-position: center; /* Centra la imagen */
+          background-repeat: no-repeat; /* Evita que la imagen se repita */
+          padding: 2rem; /* Espaciado interno para el contenido */
+          color: black; /* Cambia el texto a blanco para mejor visibilidad */
+          border-radius: 8px; /* Bordes redondeados opcionales */
+      }
+
+        </style>
   </body>
 </html>

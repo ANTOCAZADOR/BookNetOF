@@ -2,13 +2,15 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h1 class="h3 mb-4 text-gray-800">Gestión de Archivos</h1>
+            <h1 class="h3 mb-4 text-gray-800">Avisos</h1>
 
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
             <!-- Formulario para cargar archivos -->
+            @can('viewAdminDashboard', Auth::user())
+            <h2>Gestión de archivos</h2>
             <div class="card mb-4">
                 <div class="card-header">
                     <h5>Cargar Nuevo Archivo</h5>
@@ -24,17 +26,19 @@
                     </form>
                 </div>
             </div>
+            @endcan
 
             <!-- Lista de Archivos -->
             <div class="card">
                 <div class="card-header">
-                    <h5>Archivos Cargados</h5>
+                    <h5>Listado de avisos</h5>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach($archivos as $archivo)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <a href="{{ route('archivos.show', basename($archivo)) }}" class="text-decoration-none">{{ basename($archivo) }}</a>
+                                @can('viewAdminDashboard', Auth::user())
                                 <div>
                                     <a href="{{ route('archivos.edit', basename($archivo)) }}" class="btn btn-sm btn-warning">Editar</a>
                                     <form action="{{ route('archivos.destroy', basename($archivo)) }}" method="POST" style="display: inline;">
@@ -43,6 +47,7 @@
                                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este archivo?')">Eliminar</button>
                                     </form>
                                 </div>
+                                @endcan
                             </li>
                         @endforeach
                     </ul>

@@ -37,17 +37,15 @@
                     <ul class="list-group">
                         @foreach($archivos as $archivo)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="{{ route('archivos.show', basename($archivo)) }}" class="text-decoration-none">{{ basename($archivo) }}</a>
-                                @can('viewAdminDashboard', Auth::user())
+                                <a href="{{ route('archivos.show', $archivo->id) }}" class="text-decoration-none">{{ $archivo->nombre_original }}</a>
                                 <div>
-                                    <a href="{{ route('archivos.edit', basename($archivo)) }}" class="btn btn-sm btn-warning">Editar</a>
-                                    <form action="{{ route('archivos.destroy', basename($archivo)) }}" method="POST" style="display: inline;">
+                                    <a href="{{ route('archivos.edit', $archivo->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                                    <form action="{{ route('archivos.destroy', $archivo->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este archivo?')">Eliminar</button>
                                     </form>
                                 </div>
-                                @endcan
                             </li>
                         @endforeach
                     </ul>

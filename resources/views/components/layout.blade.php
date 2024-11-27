@@ -634,6 +634,10 @@
                             Cerrar sesión
                           </a>
 
+                          <a class="dropdown-item" href="{{ route('register') }}">
+                              Registrarte
+                          </a>
+
                           <!-- Formulario de Logout -->
                           <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
                               @csrf

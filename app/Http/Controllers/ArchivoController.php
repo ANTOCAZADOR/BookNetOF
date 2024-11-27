@@ -39,26 +39,33 @@ class ArchivoController extends Controller
         return view('archivos.show', compact('archivo', 'contenido'));
     }
 
-    public function destroy($archivo)
+    public function destroy($id)
     {
+        $archivo = Archivo::findOrFail($id);
         Storage::delete($archivo->ruta);
         $archivo->delete();
         return redirect()->route('archivos.index')->with('success', 'Archivo eliminado correctamente.');
     }
 
-    public function edit($archivo)
+    public function edit($id)
     {
-        $contenido = Storage::get("archivos/{$archivo}");
+        $archivo = Archivo::findOrFail($id);
+        $contenido = Storage::get($archivo->ruta); // Usamos $archivo->ruta correctamente
         return view('archivos.edit', compact('archivo', 'contenido'));
-    }
+    }    
 
-    public function update(Request $request, $archivo)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'contenido' => 'required|string',
         ]);
 
-        Storage::put("archivos/{$archivo}", $request->contenido);
+        $archivo = Archivo::findOrFail($id);
+
+        // Sobreescribe el contenido del archivo
+        Storage::put($archivo->ruta, $request->contenido);
+
         return redirect()->route('archivos.index')->with('success', 'Archivo actualizado correctamente.');
     }
+
 }

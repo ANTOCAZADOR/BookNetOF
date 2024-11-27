@@ -121,15 +121,13 @@
                             <!-- Campo Géneros -->
                             <div class="mb-4">
                                 <label for="generos" class="form-label fs-4 fw-bold">Géneros</label>
-                                <select id="generos" name="generos[]" class="form-select form-select-lg needs-validation" required>
-                                    <option value="">Selecciona un género</option>    
+                                <select id="generos" name="generos[]" class="form-control form-control-lg" multiple>
                                     @foreach($generos as $genero)
                                         <option value="{{ $genero->id }}" {{ in_array($genero->id, old('generos', [])) ? 'selected' : '' }}>
                                             {{ $genero->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                <div class="invalid-feedback">Por favor, selecciona al menos un género.</div>
                                 <small class="text-muted">Selecciona uno o más géneros para este libro.</small>
                             </div>
 

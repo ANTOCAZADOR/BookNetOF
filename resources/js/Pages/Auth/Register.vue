@@ -86,6 +86,37 @@ const submit = () => {
             </div>
 
             <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
+    <InputLabel for="terms">
+        <div class="flex items-center">
+            <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
+            
+            <div class="ms-2">
+                I agree to the 
+                <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms of Service</a>
+                and
+                <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Policy</a>
+                and
+                <a target="_blank" :href="route('aviso_privacidad')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Notice</a>
+            </div>
+        </div>
+        <InputError class="mt-2" :message="form.errors.terms" />
+    </InputLabel>
+</div>
+
+<!-- Checkbox para aceptar el Aviso de Privacidad -->
+<div class="mt-4">
+    <InputLabel for="privacy_notice">
+        <div class="flex items-center">
+            <Checkbox id="privacy_notice" v-model:checked="form.privacy_notice" name="privacy_notice" required />
+            <div class="ms-2">
+                I have read and agree to the 
+                <a target="_blank" :href="route('aviso_privacidad')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Notice</a>.
+            </div>
+        </div>
+        <InputError class="mt-2" :message="form.errors.privacy_notice" />
+    </InputLabel>
+</div>
+            <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
                 <InputLabel for="terms">
                     <div class="flex items-center">
                         <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />

@@ -59,3 +59,8 @@ Route::get('/archivos/{archivo}', [ArchivoController::class, 'show'])->name('arc
 Route::delete('/archivos/{archivo}', [ArchivoController::class, 'destroy'])->name('archivos.destroy');
 Route::get('/archivos/{archivo}/edit', [ArchivoController::class, 'edit'])->name('archivos.edit');
 Route::put('/archivos/{archivo}', [ArchivoController::class, 'update'])->name('archivos.update');
+
+
+Route::get('/aviso-privacidad', function () {
+    return view('aviso_privacidad');
+})->name('aviso_privacidad');

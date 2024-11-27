@@ -32,10 +32,11 @@ class ArchivoController extends Controller
         return redirect()->route('archivos.index')->with('success', 'Archivo subido correctamente.');
     }
 
-    public function show($archivo)
+    public function show($id)
     {
+        $archivo = Archivo::findOrFail($id);
         $contenido = Storage::get($archivo->ruta);
-        return view('archivos.show', ['archivo' => $archivo->nombre_original, 'contenido' => $contenido]);
+        return view('archivos.show', compact('archivo', 'contenido'));
     }
 
     public function destroy($archivo)

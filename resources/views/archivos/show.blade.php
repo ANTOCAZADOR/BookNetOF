@@ -6,7 +6,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>{{ basename($archivo) }}</h5>
+                    <h5>{{ $archivo->nombre_original }}</h5>
                 </div>
                 <div class="card-body">
                     <pre class="bg-light p-3">{{ $contenido }}</pre>
